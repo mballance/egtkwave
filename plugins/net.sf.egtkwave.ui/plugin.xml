@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="gtkWaveMgrFactory" name="Factory extension point" schema="schema/gtkWaveMgrFactory.exsd"/>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="net.sf.egtkwave.ui.editor.GTKWaveEditor"
+            default="false"
+            extensions="gtkw"
+            id="net.sf.egtkwave.ui.GTKWaveEditor"
+            name="GTKWave">
+      </editor>
+   </extension>
+
+</plugin>
