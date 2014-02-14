@@ -1,2 +1,8 @@
-gtkwave*/
+gtkwave*_build*/
 gtkwave/build/
+gtkbundle/
+inst/
+tcl*/
+tk*/
+
+

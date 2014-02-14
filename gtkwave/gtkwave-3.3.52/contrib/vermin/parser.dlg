@@ -1,0 +1,840 @@
+<<
+/* parser.dlg -- DLG Description of scanner
+ *
+ * Generated from: ./verilog.g
+ *
+ * Terence Parr, Will Cohen, and Hank Dietz: 1989-2001
+ * Purdue University Electrical Engineering
+ * With AHPCRC, University of Minnesota
+ * ANTLR Version 1.33MR33
+ */
+
+#define ANTLR_VERSION	13333
+#include "pcctscfg.h"
+#include "pccts_stdio.h"
+
+
+#include "attrib.h"
+#include "vpp_common.h"
+
+#if defined __MINGW32__ || defined _MSC_VER
+#define realpath(N,R) _fullpath((R),(N),_MAX_PATH)
+#endif
+
+int zzcr_attr(Attrib *attr, int token, char *text);
+void vpp_update_yyfilename(const char *str);
+void vpp_update_yylineno(const char *str);
+
+  
+#define LL_K 2
+#include "antlr.h"
+#include "keyword_tokens.h"
+#include "tokens.h"
+#include "dlgdef.h"
+LOOKAHEAD
+
+void
+#ifdef __USE_PROTOS
+zzerraction(void)
+#else
+zzerraction()
+#endif
+{
+	(*zzerr)("invalid token");
+	zzadvance();
+	zzskip();
+}
+>>
+
+
+%%START
+
+@
+	<<
+		NLA = V_EOF;
+    /* will set NLA=V_EOF; in generation*/   
+	>>
+
+[\ \t\b\r]+
+	<<
+		NLA = 183;
+    addtoken(0); zzskip();   
+	>>
+
+\n
+	<<
+		NLA = 184;
+    addtoken(1); zzskip();   
+	>>
+
+[0-9_]+
+	<<
+		NLA = V_DECIMAL_NUMBER;
+    addtoken(0); STMODE;   
+	>>
+
+[0-9_]+\.[0-9_]+
+	<<
+		NLA = V_FLOAT1;
+    addtoken(0); STMODE;   
+	>>
+
+[0-9_]+(\.[0-9_]+)?[Ee][0-9_]+
+	<<
+		NLA = V_FLOAT2;
+    addtoken(0); STMODE;   
+	>>
+
+[0-9_]*\'[dD][0-9_]+
+	<<
+		NLA = V_DBASE;
+    addtoken(0); STMODE;   
+	>>
+
+[0-9_]*\'[bB][xXzZ01_\?]+
+	<<
+		NLA = V_BBASE;
+    addtoken(0); STMODE;   
+	>>
+
+[0-9_]*'[oO][xXzZ0-7_\?]+
+	<<
+		NLA = V_OBASE;
+    addtoken(0); STMODE;   
+	>>
+
+[0-9_]*\'[hH][xXzZ0-9A-Fa-f_\?]+
+	<<
+		NLA = V_HBASE;
+    addtoken(0); STMODE;   
+	>>
+
+\"~[\"\r\n]*\"
+	<<
+		NLA = V_STRING;
+    addtoken(0); STMODE;   
+	>>
+
+\=
+	<<
+		NLA = V_EQ;
+    addtoken(0); STMODE;   
+	>>
+
+\.
+	<<
+		NLA = V_DOT;
+    addtoken(0); STMODE;  
+	>>
+
+\+
+	<<
+		NLA = V_PLUS;
+    addtoken(0); STMODE;   
+	>>
+
+\-
+	<<
+		NLA = V_MINUS;
+    addtoken(0); STMODE;   
+	>>
+
+\!
+	<<
+		NLA = V_BANG;
+    addtoken(0); STMODE;   
+	>>
+
+\~
+	<<
+		NLA = V_TILDE;
+    addtoken(0); STMODE;   
+	>>
+
+\&
+	<<
+		NLA = V_AND;
+    addtoken(0); STMODE;   
+	>>
+
+\~\&
+	<<
+		NLA = V_NAND;
+    addtoken(0); STMODE;   
+	>>
+
+\|
+	<<
+		NLA = V_OR;
+    addtoken(0); STMODE;   
+	>>
+
+\~\|
+	<<
+		NLA = V_NOR;
+    addtoken(0); STMODE;   
+	>>
+
+\^
+	<<
+		NLA = V_XOR;
+    addtoken(0); STMODE;   
+	>>
+
+\~\^
+	<<
+		NLA = V_XNOR;
+    addtoken(0); STMODE;   
+	>>
+
+\*
+	<<
+		NLA = V_STAR;
+    addtoken(0); STMODE;   
+	>>
+
+\/
+	<<
+		NLA = V_SLASH;
+    addtoken(0); STMODE;   
+	>>
+
+\%
+	<<
+		NLA = V_MOD;
+    addtoken(0); STMODE;   
+	>>
+
+\=\=
+	<<
+		NLA = V_EQ2;
+    addtoken(0); STMODE;   
+	>>
+
+\!\=
+	<<
+		NLA = V_NEQ;
+    addtoken(0); STMODE;   
+	>>
+
+\=\=\=
+	<<
+		NLA = V_EQ3;
+    addtoken(0); STMODE;   
+	>>
+
+\!\=\=
+	<<
+		NLA = V_NEQ2;
+    addtoken(0); STMODE;   
+	>>
+
+\&\&
+	<<
+		NLA = V_AND2;
+    addtoken(0); STMODE;   
+	>>
+
+\&\&\&
+	<<
+		NLA = V_AND3;
+    addtoken(0); STMODE;   
+	>>
+
+\|\|
+	<<
+		NLA = V_OR2;
+    addtoken(0); STMODE;   
+	>>
+
+\<
+	<<
+		NLA = V_LT;
+    addtoken(0); STMODE;   
+	>>
+
+\<\=
+	<<
+		NLA = V_LEQ;
+    addtoken(0); STMODE;   
+	>>
+
+\>
+	<<
+		NLA = V_GT;
+    addtoken(0); STMODE;   
+	>>
+
+\>\=
+	<<
+		NLA = V_GEQ;
+    addtoken(0); STMODE;   
+	>>
+
+\^\~
+	<<
+		NLA = V_XNOR2;
+    addtoken(0); STMODE;   
+	>>
+
+\<\<
+	<<
+		NLA = V_SHL;
+    addtoken(0); STMODE;   
+	>>
+
+\>\>
+	<<
+		NLA = V_SHR;
+    addtoken(0); STMODE;   
+	>>
+
+\<\<\<
+	<<
+		NLA = V_SSHL;
+    addtoken(0); STMODE;   
+	>>
+
+\>\>\>
+	<<
+		NLA = V_SSHR;
+    addtoken(0); STMODE;   
+	>>
+
+\*\*
+	<<
+		NLA = V_POW;
+    addtoken(0); STMODE;   
+	>>
+
+\?
+	<<
+		NLA = V_QUEST;
+    addtoken(0); STMODE;   
+	>>
+
+\:
+	<<
+		NLA = V_COLON;
+    addtoken(0); STMODE;   
+	>>
+
+\(
+	<<
+		NLA = V_LP;
+    addtoken(0); STMODE;   
+	>>
+
+\)
+	<<
+		NLA = V_RP;
+    addtoken(0); STMODE;   
+	>>
+
+\[
+	<<
+		NLA = V_LBRACK;
+    addtoken(0); STMODE;   
+	>>
+
+\]
+	<<
+		NLA = V_RBRACK;
+    addtoken(0); STMODE;   
+	>>
+
+\{
+	<<
+		NLA = V_LBRACE;
+    addtoken(0); STMODE;   
+	>>
+
+\}
+	<<
+		NLA = V_RBRACE;
+    addtoken(0); STMODE;   
+	>>
+
+\,
+	<<
+		NLA = V_COMMA;
+    addtoken(0); STMODE;   
+	>>
+
+\@
+	<<
+		NLA = V_AT;
+    addtoken(0); STMODE;   
+	>>
+
+\;
+	<<
+		NLA = V_SEMI;
+    addtoken(0); STMODE;   
+	>>
+
+\#
+	<<
+		NLA = V_POUND;
+    addtoken(0); STMODE;   
+	>>
+
+\-\>
+	<<
+		NLA = V_RARROW;
+    addtoken(0); STMODE;   
+	>>
+
+table
+	<<
+		NLA = V_TABLE;
+    addtoken(0); if(!do_not_translate) { zzmode(UDP); } else { zzskip(); }   
+	>>
+
+\=\>
+	<<
+		NLA = V_SPD1;
+    addtoken(0); STMODE;   
+	>>
+
+\*\>
+	<<
+		NLA = V_SPD2;
+    addtoken(0); STMODE;   
+	>>
+
+\$[_a-zA-Z][_a-zA-Z\$0-9]*
+	<<
+		NLA = V_FUNCTION_NAME;
+    addtoken(0); STMODE;   
+	>>
+
+[_a-zA-Z][_a-zA-Z\$0-9]*
+	<<
+		NLA = V_IDENTIFIER;
+    addtoken(0); NLA = verilog_keyword_code(zztext, zzrewind); STMODE;   
+	>>
+
+\\~[\ \t\b\n\r]+
+	<<
+		NLA = V_IDENTIFIER2;
+    addtoken(0); STMODE;   
+	>>
+
+[_a-zA-Z][_a-zA-Z\$0-9]*(\.[_a-zA-Z][_a-zA-Z\$0-9]*)+
+	<<
+		NLA = V_IDENDOT;
+    addtoken(0); STMODE;   
+	>>
+
+//~[\n]*
+	<<
+		NLA = 185;
+    addtoken(0); parsecomment(); zzskip();   
+	>>
+
+/\*
+	<<
+		NLA = 186;
+    addtoken(0); zzcomment_depth=1; zzcomment_entry=1; zzcomment_start=zzline; zzmode(COMMENT); zzskip();   
+	>>
+
+\*/
+	<<
+		NLA = 187;
+    addtoken(0); 
+    mesg("** End of comment when not in a comment on line %d in file '%s'.\n", zzline, zzfilename);
+    zzskip();   
+	>>
+
+`uselib~[\n]*
+	<<
+		NLA = 204;
+    addtoken(0); zzskip();   
+	>>
+
+`default_nettype[\ \t\b]+[a-z]+
+	<<
+		NLA = 205;
+    addtoken(0); zzskip();   
+	>>
+
+`define~[\n]*
+	<<
+		NLA = 206;
+    addtoken(0); if(!do_not_translate) store_define(zztext); zzskip();   
+	>>
+
+`undef[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 207;
+    addtoken(0); if(!do_not_translate) remove_define(zztext); zzskip();   
+	>>
+
+`unconnected_drive[\ \t\b]+pull[01]
+	<<
+		NLA = 208;
+    addtoken(0); zzskip();   
+	>>
+
+`nounconnected_drive
+	<<
+		NLA = 209;
+    addtoken(0); zzskip();   
+	>>
+
+`resetall
+	<<
+		NLA = 210;
+    addtoken(0); zzskip();   
+	>>
+
+`timescale[\ \t\b]+1{0}{0}[\ \t\b]*{[munpf]}s[\ \t\b]*/[\ \t\b]*1{0}{0}[\ \t\b]*{[munpf]}s
+	<<
+		NLA = 211;
+    addtoken(0); zzskip();   
+	>>
+
+`ifdef[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 212;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_ifdef(zztext); zzskip();   
+	>>
+
+`ifndef[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 213;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_ifndef(zztext); zzskip();   
+	>>
+
+`else
+	<<
+		NLA = 214;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_else(); zzskip();   
+	>>
+
+`endif
+	<<
+		NLA = 215;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_endif(); zzskip();   
+	>>
+
+`elsif[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 216;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_elsif(zztext); zzskip();   
+	>>
+
+`include[\ \t\b]+\"~[\"\n]*\"
+	<<
+		NLA = 217;
+    addtoken(0); if(!do_not_translate) handle_include(zztext); zzskip();   
+	>>
+
+`[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 218;
+    addtoken(0); 
+    if(is_builtin_define(zztext+1, zzrewind-1)) warn("** Warning: ignoring unsupported '%s' directive in file '%s' line %d\n", zztext, zzfilename, zzline);
+    else if(!do_not_translate) 
+    warn("** Warning: macro '%s' undefined in file '%s' line %d\n", zztext, zzfilename, zzline);
+    zzskip();   
+	>>
+
+
+%%COMMENT
+
+@
+	<<
+		NLA = V_EOF;
+	>>
+
+/\*
+	<<
+		NLA = 188;
+    addtoken(0); /* zzcomment_depth++; <=- VERILOG DOES NOT ALLOW NESTED COMMENTS */
+    zzskip();   
+	>>
+
+\*/
+	<<
+		NLA = 189;
+    addtoken(0); zzcomment_depth--; zzskip(); if(!zzcomment_depth) { zzmode(START); }   
+	>>
+
+\n
+	<<
+		NLA = 190;
+    addtoken(1); zzskip();   
+	>>
+
+~[/\*\n]+
+	<<
+		NLA = 191;
+    addtoken(0); if(zzcomment_entry) { parsecomment(); zzcomment_entry=0; } zzskip();   
+	>>
+
+[/\*]
+	<<
+		NLA = 192;
+    addtoken(0); zzskip();   
+	>>
+
+
+%%UDP
+
+@
+	<<
+		NLA = V_EOF;
+	>>
+
+[01xX\?bB]
+	<<
+		NLA = V_OUTPUT_SYMBOL;
+    addtoken(0); STMODE;   
+	>>
+
+[\?bB]
+	<<
+		NLA = V_LEVEL_SYMBOL_EXTRA;
+    addtoken(0); STMODE;   
+	>>
+
+[rRfFpPnN\*]
+	<<
+		NLA = V_EDGE_SYMBOL;
+    addtoken(0); STMODE;   
+	>>
+
+\-
+	<<
+		NLA = V_HYPHEN;
+    addtoken(0); STMODE;   
+	>>
+
+\n
+	<<
+		NLA = 193;
+    addtoken(1); zzskip();   
+	>>
+
+[\ \t\b\r]+
+	<<
+		NLA = 194;
+    addtoken(0); zzskip();   
+	>>
+
+\:
+	<<
+		NLA = V_COLON;
+    addtoken(0); STMODE;   
+	>>
+
+\;
+	<<
+		NLA = V_SEMI;
+    addtoken(0); STMODE;   
+	>>
+
+endtable
+	<<
+		NLA = V_ENDTABLE;
+    addtoken(0); if(!do_not_translate) { zzmode(START); } else { zzskip(); }   
+	>>
+
+\$[_a-zA-Z][_a-zA-Z\$0-9]*
+	<<
+		NLA = V_FUNCTION_NAME;
+    addtoken(0); STMODE;   
+	>>
+
+[_a-zA-Z][_a-zA-Z\$0-9]*
+	<<
+		NLA = V_IDENTIFIER;
+    addtoken(0); STMODE;   
+	>>
+
+\\~[\ \t\b\n\r]+
+	<<
+		NLA = V_IDENTIFIER2;
+    addtoken(0); STMODE;   
+	>>
+
+[_a-zA-Z][_a-zA-Z\$0-9]*(\.[_a-zA-Z][_a-zA-Z\$0-9]*)+
+	<<
+		NLA = V_IDENDOT;
+    addtoken(0); STMODE;   
+	>>
+
+\(
+	<<
+		NLA = V_LP;
+    addtoken(0); STMODE;   
+	>>
+
+\)
+	<<
+		NLA = V_RP;
+    addtoken(0); STMODE;   
+	>>
+
+`~[\n]*
+	<<
+		NLA = 195;
+    addtoken(0); zzskip();   
+	>>
+
+//~[\n]*
+	<<
+		NLA = 196;
+    addtoken(0); parsecomment(); zzskip();   
+	>>
+
+/\*
+	<<
+		NLA = 197;
+    addtoken(0); zzcomment_depth=1; zzcomment_entry=1; zzcomment_start=zzline; zzmode(COMMENT); zzskip();   
+	>>
+
+\*/
+	<<
+		NLA = 198;
+    addtoken(0); 
+    mesg("** End of comment when not in a comment on line %d in file '%s'.\n", zzline, zzfilename);
+    zzskip();   
+	>>
+
+`uselib~[\n]*
+	<<
+		NLA = 219;
+    addtoken(0); zzskip();   
+	>>
+
+`default_nettype[\ \t\b]+[a-z]+
+	<<
+		NLA = 220;
+    addtoken(0); zzskip();   
+	>>
+
+`define~[\n]*
+	<<
+		NLA = 221;
+    addtoken(0); if(!do_not_translate) store_define(zztext); zzskip();   
+	>>
+
+`undef[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 222;
+    addtoken(0); if(!do_not_translate) remove_define(zztext); zzskip();   
+	>>
+
+`unconnected_drive[\ \t\b]+pull[01]
+	<<
+		NLA = 223;
+    addtoken(0); zzskip();   
+	>>
+
+`nounconnected_drive
+	<<
+		NLA = 224;
+    addtoken(0); zzskip();   
+	>>
+
+`resetall
+	<<
+		NLA = 225;
+    addtoken(0); zzskip();   
+	>>
+
+`timescale[\ \t\b]+1{0}{0}[\ \t\b]*{[munpf]}s[\ \t\b]*/[\ \t\b]*1{0}{0}[\ \t\b]*{[munpf]}s
+	<<
+		NLA = 226;
+    addtoken(0); zzskip();   
+	>>
+
+`ifdef[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 227;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_ifdef(zztext); zzskip();   
+	>>
+
+`ifndef[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 228;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_ifndef(zztext); zzskip();   
+	>>
+
+`else
+	<<
+		NLA = 229;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_else(); zzskip();   
+	>>
+
+`endif
+	<<
+		NLA = 230;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_endif(); zzskip();   
+	>>
+
+`elsif[\ \t\b]+[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 231;
+    addtoken(0); if(!(do_not_translate&~STMODE_XLATEOFF_IFDEF)) handle_elsif(zztext); zzskip();   
+	>>
+
+`include[\ \t\b]+\"~[\"\n]*\"
+	<<
+		NLA = 232;
+    addtoken(0); if(!do_not_translate) handle_include(zztext); zzskip();   
+	>>
+
+`[a-zA-Z_][a-zA-Z0-9_$]*
+	<<
+		NLA = 233;
+    addtoken(0); 
+    if(is_builtin_define(zztext+1, zzrewind-1)) warn("** Warning: ignoring unsupported '%s' directive in file '%s' line %d\n", zztext, zzfilename, zzline);
+    else if(!do_not_translate) 
+    warn("** Warning: macro '%s' undefined in file '%s' line %d\n", zztext, zzfilename, zzline);
+    zzskip();   
+	>>
+
+
+%%UDPCOMMENT
+
+@
+	<<
+		NLA = V_EOF;
+	>>
+
+/\*
+	<<
+		NLA = 199;
+    addtoken(0); /* zzcomment_depth++; <=- VERILOG DOES NOT ALLOW NESTED COMMENTS */
+    zzskip();   
+	>>
+
+\*/
+	<<
+		NLA = 200;
+    addtoken(0); zzcomment_depth--; zzskip(); if(!zzcomment_depth) { zzmode(UDP); }   
+	>>
+
+\n
+	<<
+		NLA = 201;
+    addtoken(1); zzskip();   
+	>>
+
+~[/\*\n]+
+	<<
+		NLA = 202;
+    addtoken(0); if(zzcomment_entry) { parsecomment(); zzcomment_entry=0; } zzskip();   
+	>>
+
+[/\*]
+	<<
+		NLA = 203;
+    addtoken(0); zzskip();   
+	>>
+
+%%

@@ -91,8 +91,10 @@ public class GtkWaveMgrFactory implements IGtkWaveMgrFactory {
 		
 		System.out.println("create() " + port);
 		long pid = GtkWaveJni.launch(parent.handle, 
-				gtkwave_exe.getAbsolutePath() + " -M -N --hidesst " +
-				"c:/usr1/fun/egtkwave/gtkwave_mballance/gtkwave/tmp.vcd " +
+				gtkwave_exe.getAbsolutePath() + " -M " +
+//				"-N " +
+				"--hidesst " +
+//				"c:/usr1/fun/egtkwave/gtkwave_mballance/gtkwave/tmp.vcd " +
 				"--cmdserver " + port + " " + 
 				""
 				);

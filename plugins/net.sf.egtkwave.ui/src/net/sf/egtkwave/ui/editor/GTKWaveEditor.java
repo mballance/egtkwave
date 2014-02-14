@@ -6,11 +6,18 @@ import net.sf.egtkwave.ui.mgr.IGtkWaveMgr;
 import net.sf.egtkwave.ui.mgr.IGtkWaveMgrFactory;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
@@ -20,6 +27,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 public class GTKWaveEditor extends EditorPart {
 	private IGtkWaveMgr				fWaveMgr;
 	private GTKWaveOutlinePage		fOutline;
+	private Composite				fEmbeddedWindow;
 
 	public GTKWaveEditor() {
 		// TODO Auto-generated constructor stub
@@ -84,7 +92,13 @@ public class GTKWaveEditor extends EditorPart {
 			fWaveMgr = f.create(fParent);
 			
 			if (fOutline != null) {
-				fOutline.refresh();
+				Display.getDefault().asyncExec(new Runnable() {
+					
+					@Override
+					public void run() {
+						fOutline.refresh();
+					}
+				});
 			}
 
 			/*
@@ -129,13 +143,45 @@ public class GTKWaveEditor extends EditorPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		Composite ef = new Composite(parent, SWT.EMBEDDED);
-		ef.setLayout(new GridLayout());
-		ef.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		fEmbeddedWindow = new Composite(parent, SWT.EMBEDDED);
+		fEmbeddedWindow.setLayout(new GridLayout());
+		fEmbeddedWindow.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		Creator c = new Creator(ef);
+		final Listener l = new Listener() {
+			
+			@Override
+			public void handleEvent(Event event) {
+				System.out.println("HandleEvent: " + event);
+			}
+		};
+		
+		/*
+		for (int ev=0; ev<100; ev++) {
+			fEmbeddedWindow.addListener(ev, l);
+		}
+		 */
+
+		final Creator c = new Creator(fEmbeddedWindow);
 //		Creator c = new Creator(parent);
-		Display.getCurrent().asyncExec(c);
+		
+//		c.run();
+		Job c_job = new Job("CreateJob") {
+			protected IStatus run(IProgressMonitor monitor) {
+				monitor.beginTask("Opening file", 1000);
+				c.run();
+				monitor.done();
+				
+				if (fWaveMgr != null) {
+					fWaveMgr.loadFile(new NullProgressMonitor(), 
+							"c:/usr1/fun/egtkwave/gtkwave_mballance/gtkwave/tmp.vcd");
+				}
+				
+				return Status.OK_STATUS;
+			}
+		};
+		
+		c_job.schedule();
+//		Display.getCurrent().asyncExec(c);
 		
 		
 	
@@ -144,15 +190,19 @@ public class GTKWaveEditor extends EditorPart {
 
 	@Override
 	public void setFocus() {
+		/*
 		System.out.println("setFocus: " + Thread.currentThread());
-		// TODO Auto-generated method stub
-
+		 */
+		if (fEmbeddedWindow != null) {
+			fEmbeddedWindow.setFocus();
+//			fEmbeddedWindow.forceFocus();
+//			fEmbeddedWindow.traverse(SWT.TRAVERSE_RETURN);
+		}
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
-		System.out.println("getAdapter: " + adapter.getClass().getName());
 		if (adapter.equals(IContentOutlinePage.class)) {
 			if (fOutline == null) {
 				fOutline = new GTKWaveOutlinePage(this);

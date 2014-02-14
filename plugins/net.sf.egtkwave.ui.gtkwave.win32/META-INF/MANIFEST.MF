@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Win32
+Bundle-SymbolicName: net.sf.egtkwave.ui.gtkwave.win32;singleton:=true
+Bundle-Version: 1.2.3
+Fragment-Host: net.sf.egtkwave.ui;bundle-version="1.2.3"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-PlatformFilter: (osgi.os=win32)

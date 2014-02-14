@@ -1,10 +1,9 @@
 package net.sf.egtkwave.ui.editor.outline;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.egtkwave.ui.mgr.IGtkWaveMgr;
+import net.sf.egtkwave.ui.mgr.TreeNode;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -27,43 +26,19 @@ public class GTKWaveTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		String roots = "";
-		try {
-			roots = fInput.command("gtkwave::getTreeNodeRoots");
-		} catch (IOException e) { }
-		
-		String roots_l[] = roots.split(" ");
-		
-		for (int i=0; i<roots_l.length; i++) {
-			roots_l[i] = roots_l[i].trim();
+		if (fInput != null) {
+			List<TreeNode> roots = fInput.getTreeNodeRoots();
+			return roots.toArray();
+		} else {
+			return new Object[0];
 		}
-		
-		System.out.println("roots_l.length=" + roots_l.length);
-		
-		return roots_l;
 	}
 
 	@Override
-	public Object[] getChildren(Object parentElement) {
-		if (parentElement instanceof String) {
-			List<String> ret = new ArrayList<String>();
-			String roots = "";
-			try {
-				roots = fInput.command("gtkwave::getTreeNodeChildren " + parentElement.toString());
-			} catch (IOException e) { }
-			
-			String roots_l[] = roots.split(" ");
-		
-			for (int i=0; i<roots_l.length; i++) {
-				String c = roots_l[i].trim();
-				if (!c.equals("")) {
-					ret.add(c);
-				}
-			}
-			
-			System.out.println("children roots_l.length=" + roots_l.length);
-		
-			return ret.toArray(new String[ret.size()]);
+	public Object[] getChildren(Object parent) {
+		if (parent instanceof TreeNode) {
+			List<TreeNode> children = fInput.getTreeNodeChildren((TreeNode)parent);
+			return children.toArray();
 		} else {
 			return new Object[0];
 		}
@@ -71,13 +46,19 @@ public class GTKWaveTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object getParent(Object element) {
-		// TODO Auto-generated method stub
+		if (element instanceof TreeNode) {
+			return ((TreeNode)element).getParent();
+		}
+
 		return null;
 	}
 
 	@Override
 	public boolean hasChildren(Object element) {
-		return (getChildren(element).length > 0);
+		if (element instanceof TreeNode) {
+			return ((TreeNode)element).hasChildren();
+		} 
+		return false;
 	}
 
 }

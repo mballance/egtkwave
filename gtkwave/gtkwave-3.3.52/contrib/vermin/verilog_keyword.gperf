@@ -1,0 +1,135 @@
+%{
+
+#include <string.h>
+#include "keyword_tokens.h"
+
+struct verilog_keyword { const char *name; int token; };
+
+%}
+struct verilog_keyword
+%%
+always, V_ALWAYS
+and, V_ANDLIT
+assign, V_ASSIGN
+begin, V_BEGIN
+buf, V_BUF
+bufif0, V_BUFIF0
+bufif1, V_BUFIF1
+case, V_CASE
+casex, V_CASEX
+casez, V_CASEZ
+cmos, V_CMOS
+deassign, V_DEASSIGN
+default, V_DEFAULT
+defparam, V_DEFPARAM
+disable, V_DISABLE
+edge, V_EDGE
+else, V_ELSE
+end, V_END
+endcase, V_ENDCASE
+endfunction, V_ENDFUNCTION
+endmodule, V_ENDMODULE
+endprimitive, V_ENDPRIMITIVE
+endspecify, V_ENDSPECIFY
+endtable, V_ENDTABLE
+endtask, V_ENDTASK
+event, V_EVENT
+for, V_FOR
+force, V_FORCE
+forever, V_FOREVER
+fork, V_FORK
+function, V_FUNCTION
+highz0, V_HIGHZ0
+highz1, V_HIGHZ1
+if, V_IF
+initial, V_INITIAL
+inout, V_INOUT
+input, V_INPUT
+integer, V_INTEGER
+join, V_JOIN
+large, V_LARGE
+macromodule, V_MACROMODULE
+medium, V_MEDIUM
+module, V_MODULE
+nand, V_NANDLIT
+negedge, V_NEGEDGE
+nmos, V_NMOS
+nor, V_NORLIT
+not, V_NOTLIT
+notif0, V_NOTIF0
+notif1, V_NOTIF1
+or, V_ORLIT
+output, V_OUTPUT
+parameter, V_PARAMETER
+pmos, V_PMOS
+posedge, V_POSEDGE
+primitive, V_PRIMITIVE
+pull0, V_PULL0
+pull1, V_PULL1
+pulldown, V_PULLDOWN
+pullup, V_PULLUP
+rcmos, V_RCMOS
+real, V_REAL
+realtime, V_REAL
+reg, V_REG
+release, V_RELEASE
+repeat, V_REPEAT
+rnmos, V_RNMOS
+rpmos, V_RPMOS
+rtran, V_RTRAN
+rtranif0, V_RTRANIF0
+rtranif1, V_RTRANIF1
+scalared, V_SCALARED
+small, V_SMALL
+specify, V_SPECIFY
+specparam, V_SPECPARAM
+strong0, V_STRONG0
+strong1, V_STRONG1
+supply0, V_SUPPLY0
+supply1, V_SUPPLY1
+table, V_TABLE
+task, V_TASK
+time, V_TIME
+tran, V_TRAN
+tranif0, V_TRANIF0
+tranif1, V_TRANIF1
+tri, V_TRI
+tri0, V_TRI0
+tri1, V_TRI1
+triand, V_TRIAND
+trior, V_TRIOR
+trireg, V_TRIREG
+vectored, V_VECTORED
+wait, V_WAIT
+wand, V_WAND
+weak0, V_WEAK0
+weak1, V_WEAK1
+while, V_WHILE
+wire, V_WIRE
+wor, V_WOR
+xnor, V_XNORLIT
+xor, V_XORLIT
+automatic, V_AUTOMATIC
+cell, V_CELL
+config, V_CONFIG
+design, V_DESIGN
+endconfig, V_ENDCONFIG
+endgenerate, V_ENDGENERATE
+generate, V_GENERATE
+genvar, V_GENVAR
+instance, V_INSTANCE
+liblist, V_LIBLIST
+localparam, V_LOCALPARAM
+noshowcancelled, V_NOSHOWCANCELLED
+pulsestyle_onevent, V_PULSESTYLE_ONEVENT
+pulsestyle_ondetect, V_PULSESTYLE_ONDETECT
+showcancelled, V_SHOWCANCELLED
+signed, V_SIGNED
+use, V_USE
+%%
+
+int verilog_keyword_code(const char *s, unsigned int len)
+{
+const struct verilog_keyword *rc = check_identifier(s, len);
+return(rc ? rc->token : V_IDENTIFIER);
+}
