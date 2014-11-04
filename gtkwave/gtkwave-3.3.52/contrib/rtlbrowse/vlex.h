@@ -19,11 +19,13 @@
 #define V_KW (14)
 #define V_KW_2005 (15)
 
+typedef size_t yy_size_t;
+
 extern int my_yylineno;
 extern char *v_preproc_name;
 int yylex(void);
 extern char *yytext;
-extern int yyleng;
+extern yy_size_t yyleng;
 
 const char *is_builtin_define (register const char *str, register unsigned int len);
 

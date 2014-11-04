@@ -883,6 +883,8 @@ while (1)
 #ifdef WAVE_USE_XID
                 case 'X': 
                         sscanf(optarg, "%x", &GLOBALS->socket_xid);
+			fprintf(stdout, "socket_xid=%p", GLOBALS->socket_xid);
+			fflush(stdout);
 			splash_disable_rc_override = 1;
                         break;
 #endif
@@ -1703,8 +1705,8 @@ if(!mainwindow_already_built)
 if(!GLOBALS->socket_xid)
 #endif
         {
-//MSB:	GLOBALS->mainwindow = gtk_window_new(GLOBALS->disable_window_manager ? GTK_WINDOW_POPUP : GTK_WINDOW_TOPLEVEL);
-	GLOBALS->mainwindow = gtk_window_new(GTK_WINDOW_POPUP);
+	GLOBALS->mainwindow = gtk_window_new(GLOBALS->disable_window_manager ? GTK_WINDOW_POPUP : GTK_WINDOW_TOPLEVEL);
+//	GLOBALS->mainwindow = gtk_window_new(GTK_WINDOW_POPUP);
 	wave_gtk_window_set_title(GTK_WINDOW(GLOBALS->mainwindow), GLOBALS->winname, GLOBALS->dumpfile_is_modified ? WAVE_SET_TITLE_MODIFIED: WAVE_SET_TITLE_NONE, 0);
 
 	if((GLOBALS->initial_window_width>0)&&(GLOBALS->initial_window_height>0))

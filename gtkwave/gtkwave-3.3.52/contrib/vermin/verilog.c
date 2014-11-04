@@ -6,7 +6,7 @@
  * With AHPCRC, University of Minnesota
  * ANTLR Version 1.33MR33
  *
- *   c:\usr1\fun\egtkwave\gtkwave_mballance\gtkwave\gtkwave-3.3.52_build_win32\contrib\pccts\antlr\antlr.exe -ga -k 2 -gl ../../../gtkwave-3.3.52/contrib/vermin/verilog.g
+ *   ../pccts/antlr/antlr -ga -k 2 -gl ../../../gtkwave-3.3.52/contrib/vermin/verilog.g
  *
  */
 

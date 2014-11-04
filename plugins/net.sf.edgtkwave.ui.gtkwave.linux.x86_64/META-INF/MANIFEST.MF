@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: X86_64
+Bundle-SymbolicName: net.sf.egtkwave.ui.gtkwave.linux.x86_64
+Bundle-Version: 1.2.3
+Fragment-Host: net.sf.egtkwave.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
